@@ -3,12 +3,6 @@
 Open command launchers inside tmux with `prefix+key` bindings and reuse each
 launcher window across the current tmux session.
 
-![screen.png](screen.png)
-
-Each binding opens its configured command in the current pane path. If the
-launcher window for that key already exists, the plugin focuses it instead of
-creating a new one.
-
 ## Installation
 
 ### Manual installation
