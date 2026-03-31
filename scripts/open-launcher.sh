@@ -40,8 +40,8 @@ getWindowIdOption() {
 }
 
 getWindowName() {
-  local launcher_key="$1"
-  printf 'launcher:%s\n' "$launcher_key"
+  local command="$1"
+  printf '%s\n' "$command"
 }
 
 getWindowTarget() {
@@ -106,7 +106,7 @@ openLauncher() {
     WINDOW_TARGET="$(getWindowTarget "$SESSION_ID" "$WINDOW_POSITION")"
 
     local WINDOW_NAME
-    WINDOW_NAME="$(getWindowName "$LAUNCHER_KEY")"
+    WINDOW_NAME="$(getWindowName "$COMMAND")"
 
     if [ -n "$WINDOW_TARGET" ]; then
       WINDOW_ID="$(tmux new-window -P -F "#{window_id}" -t "$WINDOW_TARGET" -n "$WINDOW_NAME" -c "$CURRENT_PATH" "$COMMAND")"
