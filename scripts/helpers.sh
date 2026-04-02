@@ -38,12 +38,24 @@ get_launcher_field() {
 	fi
 
 	local remainder=${line#*${field_name}=}
+	local value=$remainder
+	local next_field
+	local shortest
 
-	if [ "$field_name" = "command" ]; then
-		trim_whitespace "$remainder"
-		return 0
+	for next_field in " key=" " window=" " name=" " command="; do
+		local candidate=${remainder%%${next_field}*}
+		if [ "$candidate" = "$remainder" ]; then
+			continue
+		fi
+
+		if [ -z "$shortest" ] || [ ${#candidate} -lt ${#shortest} ]; then
+			shortest=$candidate
+		fi
+	done
+
+	if [ -n "$shortest" ]; then
+		value=$shortest
 	fi
 
-	local value=${remainder%%[[:space:]]*}
 	trim_whitespace "$value"
 }

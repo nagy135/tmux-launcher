@@ -38,16 +38,17 @@ set -g @tmux-launchers 'key=a window=- command=opencode'
 ```
 
 Multiline launcher definitions. Each line uses named fields: `key`, `window`,
-and `command`.
+optional `name`, and `command`. The fields can appear in any order.
 
 - `key` is the tmux key used with the leader
 - `window` is the preferred tmux window index, or `-` to use default placement
+- `name` sets the tmux window title; if omitted, the full command is used
 - `command` is the shell command to run
 
 ```tmux
 set -g @tmux-launchers "
-key=a window=3 command=opencode --theme gruvbox
-key=b window=7 command=lazygit
-key=c window=- command=npm run dev
+key=a window=3 name=OpenCode command=opencode --theme gruvbox
+command=lazygit key=b name=LazyGit window=7
+window=- key=c command=npm run dev
 "
 ```
